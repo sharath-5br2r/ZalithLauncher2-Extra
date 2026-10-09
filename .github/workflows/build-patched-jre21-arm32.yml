@@ -1,0 +1,109 @@
+name: Build patched ARM32 Java 21 runtime
+
+on:
+  push:
+    branches:
+      - arena/ae9bdbce-mirai-launcher
+    paths:
+      - .github/scripts/repack_pojav_jre21_arm32.sh
+      - .github/scripts/verify_jre21_arm32.py
+      - .github/workflows/build-patched-jre21-arm32.yml
+      - docs/arm32-java21.md
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-patched-jre21-arm32-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build-arm32-jre21:
+    name: Build and verify ARM32 Java 21
+    if: github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/arena/ae9bdbce-mirai-launcher'
+    runs-on: ubuntu-22.04
+    timeout-minutes: 180
+    env:
+      JRE_BUILD_REF: f3936fba6fcf14f45202c5dd8d2d8179dde051b2
+      PATCHED_RUNTIME_VERSION: openjdk21.0.1-arm32-inlineintrinsics-off-8cb72d3
+
+    steps:
+      - name: Checkout Mirai Launcher
+        uses: actions/checkout@v6
+        with:
+          submodules: recursive
+
+      - name: Checkout pinned Android OpenJDK build scripts
+        uses: actions/checkout@v6
+        with:
+          repository: PojavLauncherTeam/android-openjdk-build-multiarch
+          ref: f3936fba6fcf14f45202c5dd8d2d8179dde051b2
+          path: .jre-build-source
+          persist-credentials: false
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            autoconf python3 python-is-python3 unzip zip \
+            systemtap-sdt-dev libxtst-dev libasound2-dev libelf-dev \
+            libfontconfig1-dev libx11-dev libxext-dev libxrandr-dev \
+            libxrender-dev libxt-dev
+
+      - name: Confirm pinned source and ARM32 math patch
+        run: |
+          set -euo pipefail
+          actual_ref="$(git -C .jre-build-source rev-parse HEAD)"
+          test "$actual_ref" = "$JRE_BUILD_REF"
+          grep -Fq '+define_pd_global(bool, InlineIntrinsics,             false); // Making it true breaks java.lang.Math' \
+            .jre-build-source/patches/jre_21/android/jdk21u_android.diff
+
+      - name: Build OpenJDK 21 ARM32 JRE
+        run: |
+          set -euo pipefail
+          cd .jre-build-source
+          export CI=1 TARGET_VERSION=21
+          bash 1_ci_build_arch_aarch32.sh
+
+      - name: Repack and verify the ARM32 runtime
+        run: |
+          set -euo pipefail
+          output="${RUNNER_TEMP}/bin-arm.tar.xz"
+          .github/scripts/repack_pojav_jre21_arm32.sh .jre-build-source "$output"
+          python3 .github/scripts/verify_jre21_arm32.py \
+            "$output" .jre-build-source/patches/jre_21/android
+          cp "$output" MiraiLauncher/src/main/assets/runtimes/jre-21/bin-arm.tar.xz
+          printf '%s' "$PATCHED_RUNTIME_VERSION" > MiraiLauncher/src/main/assets/runtimes/jre-21/version
+
+      - name: Upload verified runtime bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: jre21-arm32-inlineintrinsics-off
+          path: |
+            MiraiLauncher/src/main/assets/runtimes/jre-21/bin-arm.tar.xz
+            MiraiLauncher/src/main/assets/runtimes/jre-21/version
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Commit the verified runtime to the session branch
+        if: github.ref == 'refs/heads/arena/ae9bdbce-mirai-launcher'
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add \
+            MiraiLauncher/src/main/assets/runtimes/jre-21/bin-arm.tar.xz \
+            MiraiLauncher/src/main/assets/runtimes/jre-21/version
+          if git diff --cached --quiet; then
+            echo 'The verified runtime bundle is already current.'
+            exit 0
+          fi
+          git commit -m 'Bundle patched ARM32 Java 21 runtime'
+          git push origin "HEAD:${GITHUB_REF_NAME}"

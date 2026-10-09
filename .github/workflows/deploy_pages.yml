@@ -1,0 +1,56 @@
+name: Deploy website
+
+# Publishes website/ to GitHub Pages when the current default branch changes.
+#
+# One-time setup: in the repository settings open
+#   Settings -> Pages -> Build and deployment -> Source
+# and choose "GitHub Actions". The github-pages environment must allow the
+# Aerix-launcher branch to deploy.
+
+on:
+  push:
+    branches:
+      - Aerix-launcher
+    paths:
+      - "website/**"
+      - ".github/workflows/deploy_pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Let an in-flight deploy finish rather than cancelling it mid-publish.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v6
+
+      - name: Upload website
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: website
+
+  deploy:
+    # GitHub's Pages environment is protected to the site's default branch.
+    # Manual dispatches from other refs should never attempt a deployment.
+    if: github.ref == 'refs/heads/Aerix-launcher'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">Aerix Launcher mark</title>
+  <rect width="512" height="512" fill="#0B1420"/>
+  <circle cx="256" cy="256" r="204" fill="none" stroke="#D7E4ED" stroke-width="6"/>
+  <circle cx="256" cy="256" r="190" fill="none" stroke="#E0B86D" stroke-width="2"/>
+  <path d="M256 72 422 414h-81l-85-174-85 174h-81L256 72Z" fill="#D7E2EA"/>
+  <path d="m256 180 48 101h-96l48-101Z" fill="#0B1420"/>
+  <path d="M183 296h146l31 64H152l31-64Z" fill="#E0B86D"/>
+  <path d="m256 91 15 36-15 34-15-34 15-36Z" fill="#8DEFE0"/>
+</svg>

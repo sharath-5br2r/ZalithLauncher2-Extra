@@ -231,6 +231,16 @@ char * GlslConvert::Optimize(
 						}
 					}
 
+					// Keep linked shader inputs and outputs alive across post-link dead-code passes.
+					// A varying can be written by one stage and read by the next even when its
+					// producer-side value is not otherwise referenced locally.
+					foreach_in_list(ir_instruction, node, ir) {
+						ir_variable* var = node->as_variable();
+						if (var && (var->data.mode == ir_var_shader_in || var->data.mode == ir_var_shader_out)) {
+							var->data.always_active_io = true;
+						}
+					}
+
 					// Do optimization post-link
                     apply_optimizations(ir, linked, &compileOptions, (gl_shader_stage) vShaderType);
 

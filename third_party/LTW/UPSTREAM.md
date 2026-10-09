@@ -1,7 +1,7 @@
 # Large Thin Wrapper integration
 
-The `ltw/` Android library is vendored from [MojoLauncher/LTW](https://github.com/MojoLauncher/LTW), pinned at upstream commit `11f1b36f701e69731d685e94c6788e60d829ea35` (2026-09-28).
+The `ltw/` Android library is vendored from [MojoLauncher/LTW](https://github.com/MojoLauncher/LTW), pinned at upstream commit [`9dc80cb121bd1a1ba9f3b18d10c811753d4261e3`](https://github.com/MojoLauncher/LTW/commit/9dc80cb121bd1a1ba9f3b18d10c811753d4261e3) (2026-10-06). This includes the upstream shader-optimizer change that preserves linked shader inputs/outputs during post-link optimization and its follow-up fix to iterate the linked IR (`ir`).
 
 Upstream copyright and source notices are preserved in the vendored files. The upstream project is licensed under LGPL-3.0; see [`LICENSE`](LICENSE) and the upstream [README](README-upstream.md). The unused prebuilt host `glsl_compiler` helper was omitted; the Android CMake build compiles from the preserved sources.
 
-Mirai's renderer adapter lives in `ZalithLauncher/src/main/java/com/movtery/zalithlauncher/game/renderer/renderers/LTWRenderer.kt`. Gradle builds the native `libltw.so` for each requested Android ABI from the upstream CMake sources.
+Mirai's renderer adapter lives in `MiraiLauncher/src/main/java/com/movtery/zalithlauncher/game/renderer/renderers/LTWRenderer.kt`. At launch, Mirai requires detected GLES 3 support and the ABI-specific `libltw.so` to be present before selecting LTW. It retains the upstream renderer/EGL identifiers, sets `LIBGL_ES=3`, `LIBGL_NOERROR=1`, `force_glsl_extensions_warn=true`, `allow_higher_compat_version=true`, and `allow_glsl_extension_directive_midshader=true`, and routes SDL/EGL through `libltw.so`. Gradle builds the native library for each requested Android ABI; CI verifies the packaged ELF libraries and launcher wiring. This is source/packaging validation, not a real-device rendering test.

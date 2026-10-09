@@ -2169,4 +2169,15 @@
     <string name="guide_tip_blank">Tap any blank area to continue to the next step</string>
     <!-- Next-step hint shown near a screen corner during the final guide step; tapping any blank area finishes the whole guide -->
     <string name="guide_tip_finish">Tap any blank area to finish the guide</string>
+
+    <!-- Loader Update / Install Strings -->
+    <string name="versions_install_loader">Install Loader</string>
+    <string name="versions_update_loader">Update Loader</string>
+    <string name="versions_update_loader_waiting_for_others">Waiting for other tasks to finish</string>
+    <string name="versions_update_loader_diff_message">Are you sure you want to change the current game's loader?</string>
+    <string name="versions_update_loader_diff_change">Change: %1$s %2$s → %3$s</string>
+    <string name="versions_update_loader_diff_remove">Remove: %s</string>
+    <string name="versions_update_loader_diff_load">Load: %1$s %2$s</string>
+    <string name="versions_update_loader_error_message">An error occurred while installing the loader:</string>
+    <string name="versions_update_loader_success_message">The game's loader version has been successfully updated!</string>
 </resources>
