@@ -49,7 +49,7 @@ fun ClassicHome(
     Column(modifier.fillMaxSize().padding(AerixSpacing.lg)) {
         Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
             Column(Modifier.weight(1f)) {
-                Text("Aerix Launcher  /  Main Menu", color = Color.White, fontWeight = FontWeight.SemiBold, fontSize = 18.sp)
+                Text("Zalith Launcher  /  Main Menu", color = Color.White, fontWeight = FontWeight.SemiBold, fontSize = 18.sp)
                 Text("Unofficial Modified Version", color = AerixSurface.textSecondary, fontSize = 12.sp)
             }
             TopAction("Files", onFiles)
