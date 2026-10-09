@@ -726,39 +726,53 @@ fun Modifier.touchControllerTouchModifier(
             return Pair(normalizedX, normalizedY)
         }
 
-        while (true) {
-            val event = awaitPointerEvent(PointerEventPass.Initial)
-            val proxyClient = proxyClient.value
-            event.changes.fastForEach { change ->
-                if (change.isConsumed) return@fastForEach
-                if (change.changedToDownIgnoreConsumed()) {
-                    // If this new touch lands on a Legacy button, claim it as
-                    // button-owned for the entire gesture and skip TC reporting.
-                    if (LegacyButtonTracker.isOnButton(change.position.x, change.position.y)) {
-                        buttonOwnedPointers.add(change.id)
-                        return@fastForEach
-                    }
-                    if (!activePointers.containsKey(change.id)) {
-                        val pointerId = nextPointerId++
-                        activePointers[change.id] = pointerId
-                        val (x, y) = change.toProxyOffset()
-                        proxyClient?.addPointer(pointerId, x, y)
-                    }
-                } else if (change.changedToUpIgnoreConsumed()) {
-                    // Always clean up button-owned tracking on lift, regardless.
-                    buttonOwnedPointers.remove(change.id)
-                    activePointers.remove(change.id)?.let { pointerId ->
-                        proxyClient?.removePointer(pointerId)
-                    }
-                } else if (change.pressed && event.type == PointerEventType.Move) {
-                    // Skip move updates for pointers owned by Legacy buttons.
-                    if (change.id in buttonOwnedPointers) return@fastForEach
-                    activePointers[change.id]?.let { pointerId ->
-                        val (x, y) = change.toProxyOffset()
-                        proxyClient?.addPointer(pointerId, x, y)
+        //手势被取消或监听被销毁时不会有抬起事件，必须主动通知模组清除指针，否则模组侧指针会残留
+        fun releaseAllPointers() {
+            buttonOwnedPointers.clear()
+            if (activePointers.isEmpty()) return
+            proxyClient.value?.clearPointer()
+            activePointers.clear()
+        }
+
+        try {
+            while (true) {
+                val event = awaitPointerEvent(PointerEventPass.Initial)
+                val proxyClient = proxyClient.value
+                event.changes.fastForEach { change ->
+                    if (change.changedToUpIgnoreConsumed()) {
+                        //抬起事件即使已被其他处理器消费，也必须发送释放，否则模组侧指针会残留
+                        buttonOwnedPointers.remove(change.id)
+                        activePointers.remove(change.id)?.let { pointerId ->
+                            proxyClient?.removePointer(pointerId)
+                        }
+                    } else {
+                        if (change.isConsumed) return@fastForEach
+                        if (change.changedToDownIgnoreConsumed()) {
+                            // If this new touch lands on a Legacy button, claim it as
+                            // button-owned for the entire gesture and skip TC reporting.
+                            if (LegacyButtonTracker.isOnButton(change.position.x, change.position.y)) {
+                                buttonOwnedPointers.add(change.id)
+                                return@fastForEach
+                            }
+                            if (!activePointers.containsKey(change.id)) {
+                                val pointerId = nextPointerId++
+                                activePointers[change.id] = pointerId
+                                val (x, y) = change.toProxyOffset()
+                                proxyClient?.addPointer(pointerId, x, y)
+                            }
+                        } else if (change.pressed && event.type == PointerEventType.Move) {
+                            // Skip move updates for pointers owned by Legacy buttons.
+                            if (change.id in buttonOwnedPointers) return@fastForEach
+                            activePointers[change.id]?.let { pointerId ->
+                                val (x, y) = change.toProxyOffset()
+                                proxyClient?.addPointer(pointerId, x, y)
+                            }
+                        }
                     }
                 }
             }
+        } finally {
+            releaseAllPointers()
         }
     }
 }
