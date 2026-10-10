@@ -312,7 +312,7 @@ object MiraiThemeManager {
                 .putString(KEY_SELECTED_WALLPAPER, "none")
                 .apply()
             AllSettings.launcherCustomColor.save(AerixSurface.accentDefault.toArgb())
-            AllSettings.launcherColorTheme.save(ColorThemeType.AERIX)
+            AllSettings.launcherColorTheme.save(ColorThemeType.MIRAI)
         }
     }
 
