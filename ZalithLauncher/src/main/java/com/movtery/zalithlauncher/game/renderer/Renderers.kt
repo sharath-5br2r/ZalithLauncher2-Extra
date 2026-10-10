@@ -26,6 +26,8 @@
   import com.movtery.zalithlauncher.game.renderer.renderers.MobileGluesRenderer
   import com.movtery.zalithlauncher.game.renderer.renderers.NGGL4ESRenderer
   import com.movtery.zalithlauncher.game.renderer.renderers.PanfrostRenderer
+  import com.movtery.zalithlauncher.game.renderer.renderers.VGPURenderer
+  import com.movtery.zalithlauncher.game.renderer.renderers.VGPU1368Renderer
   import com.movtery.zalithlauncher.game.renderer.renderers.VirGLRenderer
   import com.movtery.zalithlauncher.utils.device.Architecture
   import com.movtery.zalithlauncher.utils.device.checkVulkanSupport
@@ -62,7 +64,9 @@
               MobileGluesRenderer,
               VirGLRenderer,
               FreedrenoRenderer,
-              PanfrostRenderer
+              PanfrostRenderer,
+              VGPURenderer,
+              VGPU1368Renderer
           )
       }
 
