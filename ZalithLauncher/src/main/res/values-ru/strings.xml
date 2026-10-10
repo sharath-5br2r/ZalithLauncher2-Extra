@@ -1096,7 +1096,6 @@
     <string name="account_local_uuid_tip_4">Эта опция предназначена для опытных пользователей и обычно не требует изменения.</string>
     <string name="account_local_uuid_invalid">Неверный формат UUID</string>
     <string name="account_local_uuid_copy">Копировать UUID</string>
-    <string name="account_local_uuid_copied">UUID аккаунта %s скопирован</string>
     <string name="versions_config_vibrate_kind_title">Тип вибрации</string>
     <string name="versions_config_vibrate_kind_summary">Выберите тип вибрации при срабатывании TouchController</string>
     <string name="versions_export">Экспорт сборки</string>
@@ -1155,7 +1154,6 @@
     <string name="screenshots_manage_no_screenshots">Нет скринов у этой сборки</string>
     <string name="screenshots_manage_export">Экспорт</string>
     <string name="screenshots_manage_export_title">Экспорт скринов</string>
-    <string name="screenshots_manage_export_success">Успешный экспорт</string>
     <string name="screenshots_manage_export_failed">Ошибка экспорта</string>
     <string name="screenshots_manage_export_all_message">Экспортировать все скрины в системную галерею?</string>
     <string name="screenshots_manage_export_selected_message">Экспортировать выбранные скрины (%1$d шт.) в системную галерею?</string>

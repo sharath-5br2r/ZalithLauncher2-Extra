@@ -1047,7 +1047,6 @@
     <string name="account_local_uuid_tip_4">この設定は上級者向けであり、調整は通常必要ありません。</string>
     <string name="account_local_uuid_invalid">無効なUUID形式</string>
     <string name="account_local_uuid_copy">UUIDをコピー</string>
-    <string name="account_local_uuid_copied">アカウント %s のUUIDがコピーされました</string>
     <string name="servers_list">サーバー</string>
     <string name="servers_list_no_servers">このバージョンにはサーバーが追加されていません</string>
     <string name="servers_list_failed_to_connect">サーバーに接続できません</string>
@@ -1146,7 +1145,6 @@
     <string name="screenshots_manage_no_screenshots">このバージョンにはスクリーンショットがありません</string>
     <string name="screenshots_manage_export">エクスポート</string>
     <string name="screenshots_manage_export_title">スクリーンショットをエクスポート</string>
-    <string name="screenshots_manage_export_success">エクスポート完了</string>
     <string name="screenshots_manage_export_failed">エクスポート失敗</string>
     <string name="screenshots_manage_export_all_message">全てのスクリーンショットをシステムの画像フォルダにエクスポートしますか？</string>
     <string name="screenshots_manage_export_selected_message">選択した %1$d 枚のスクリーンショットをシステムの画像フォルダにエクスポートしますか？</string>

@@ -425,6 +425,10 @@ private fun GameActionContent(
             }
         }
 
+        item {
+            Spacer(modifier = Modifier.height(8.dp))
+        }
+
         // 分辨率规则与游戏窗口分辨率
         item {
             Column(

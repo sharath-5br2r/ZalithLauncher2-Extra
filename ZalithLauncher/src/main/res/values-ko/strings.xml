@@ -485,7 +485,6 @@
     <string name="account_local_uuid_tip_4">이 옵션은 숙련된 사용자를 위한 것이며, 일반적으로는 조정할 필요가 없습니다.</string>
     <string name="account_local_uuid_invalid">잘못된 UUID 형식입니다</string>
     <string name="account_local_uuid_copy">UUID 복사</string>
-    <string name="account_local_uuid_copied">%s 계정의 UUID가 복사되었습니다</string>
     <string name="account_other_login_baseurl_not_set">기본 URL이 설정되지 않았습니다</string>
     <string name="account_other_login_getting_full_url">URL 주소 확인 중</string>
     <string name="account_other_login_getting_server_info">서버 정보 불러오는 중</string>
@@ -763,7 +762,6 @@
     <string name="screenshots_manage_no_screenshots">현재 버전에 스크린샷이 없습니다</string>
     <string name="screenshots_manage_export">내보내기</string>
     <string name="screenshots_manage_export_title">스크린샷 내보내기</string>
-    <string name="screenshots_manage_export_success">내보내기 완료</string>
     <string name="screenshots_manage_export_failed">내보내기 실패</string>
     <string name="screenshots_manage_export_all_message">시스템 갤러리로 모든 스크린샷을 내보내시겠습니까?</string>
     <string name="screenshots_manage_export_selected_message">선택한 %1$d장의 이미지를 시스템 갤러리로 내보내시겠습니까?</string>

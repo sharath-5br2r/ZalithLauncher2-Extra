@@ -930,7 +930,6 @@
     <string name="account_local_uuid_tip_4">Esta opção destina-se a utilizadores avançados e geralmente não precisa ser ajustada.</string>
     <string name="account_local_uuid_invalid">Formato do UUID inválido</string>
     <string name="account_local_uuid_copy">Copiar UUID</string>
-    <string name="account_local_uuid_copied">UUID copiado da conta %s</string>
     <string name="cape_name_mcc_15_th_year">MCC 15° ANO</string>
     <string name="cape_name_zombie_horse">Cavalo Zumbi</string>
     <string name="cape_name_builder">Construtor</string>

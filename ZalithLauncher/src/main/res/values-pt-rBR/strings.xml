@@ -491,7 +491,6 @@
     <string name="account_local_uuid_tip_4">Esta opção destina-se a usuários avançados e geralmente não precisa ser ajustada.</string>
     <string name="account_local_uuid_invalid">Formato do UUID inválido</string>
     <string name="account_local_uuid_copy">Copiar UUID</string>
-    <string name="account_local_uuid_copied">UUID copiado da conta %s</string>
     <string name="account_other_login_baseurl_not_set">URL base não definida</string>
     <string name="account_other_login_getting_full_url">Resolvendo URL</string>
     <string name="account_other_login_getting_server_info">Buscando informações do servidor</string>
@@ -1167,7 +1166,6 @@
     <string name="screenshots_manage_no_screenshots">Sem nenhuma print para esta versão</string>
     <string name="screenshots_manage_export">Exportar</string>
     <string name="screenshots_manage_export_title">Exportar Prints</string>
-    <string name="screenshots_manage_export_success">Exportação concluída</string>
     <string name="screenshots_manage_export_failed">Exportação falhou</string>
     <string name="screenshots_manage_export_all_message">Exportar todas as suas print para a sua galeria?</string>
     <string name="screenshots_manage_export_selected_message">Exportar %1$d prints selecionadas para a galeria do celular?</string>
@@ -1450,4 +1448,21 @@
     <string name="cape_name_hero">Herói</string>
     <string name="cape_name_twisted">Torcido</string>
     <string name="cape_name_aurora">Aurora</string>
+    <string name="download_install_error_optifine_forge17_incompatible">Este OptiFine (build %s) é incompatível com o Forge 1.17+. É necessário o OptiFine H1 Pre2 (20210924-190833) ou mais recente.</string>
+    <string name="download_modpack_download_mods_retry">Tentar baixar todos os mods novamente (%1$d/%2$d, %3$s)</string>
+    <string name="game_menu_option_fps_display_mode">Modo de exibição do FPS</string>
+    <string name="game_menu_option_fps_display_mode_number">Número</string>
+    <string name="game_menu_option_fps_display_mode_chart">Gráfico</string>
+    <string name="versions_modify_version">Modificar Versão</string>
+    <string name="versions_modify_start">Iniciar Modificação</string>
+    <string name="versions_modify_select_mc">Selecione a versão do Minecraft</string>
+    <string name="versions_modify_name_tip">Você pode renomear esta versão aqui</string>
+    <string name="versions_modify_mc_changed_title">A versão do Minecraft foi alterada</string>
+    <string name="versions_modify_mc_changed_tip">Alguns carregadores de mods podem não suportar esta versão; você pode selecionar novamente os carregadores para a nova versão.</string>
+    <string name="versions_modify_unrecognized_title">Os componentes instalados abaixo não podem ser correspondidos automaticamente (possivelmente incompatíveis com os carregadores selecionados) e serão mantidos como estão, a menos que uma nova versão seja selecionada</string>
+    <string name="versions_modify_confirm_message">As seguintes alterações serão aplicadas à versão:</string>
+    <string name="versions_modify_diff_remove">Remover %s</string>
+    <string name="versions_modify_diff_install">Instalar %1$s %2$s</string>
+    <string name="versions_modify_success">Versão modificada com sucesso!</string>
+    <string name="versions_modify_error_message">Ocorreu um erro ao modificar a versão:</string>
 </resources>

@@ -575,7 +575,6 @@
     <string name="account_local_uuid_tip_4">此選項適用於進階使用者，一般情況下無需調整。</string>
     <string name="account_local_uuid_invalid">無效的 UUID 格式</string>
     <string name="account_local_uuid_copy">複製 UUID</string>
-    <string name="account_local_uuid_copied">已複製帳號 %s 的 UUID</string>
     <string name="account_other_login_baseurl_not_set">未設定基礎 URL</string>
     <string name="account_other_login_getting_full_url">嘗試解析完整 URL 中</string>
     <string name="account_other_login_getting_server_info">獲取伺服器資訊中</string>
@@ -1129,7 +1128,6 @@
     <string name="screenshots_manage_no_screenshots">目前版本尚無截圖</string>
     <string name="screenshots_manage_export">匯出</string>
     <string name="screenshots_manage_export_title">匯出截圖</string>
-    <string name="screenshots_manage_export_success">匯出完成</string>
     <string name="screenshots_manage_export_failed">匯出失敗</string>
     <string name="screenshots_manage_export_all_message">是否匯出所有圖片到系統相冊？</string>
     <string name="screenshots_manage_export_selected_message">是否匯出選中的 %1$d 張圖片到系統相冊？</string>
